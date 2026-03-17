@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import declarative_base, sessionmaker,relationship
 
 Base = declarative_base()
@@ -35,7 +35,7 @@ class Prato(Base):
 #Conexao com db
 
 engine = create_engine("sqlite:///restaurantes.db")
-Base.metadata.ceate_all(engine)
+Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 
 def cadastrar():
@@ -119,7 +119,7 @@ deletar()
 def listar():
     with Session() as session:
         try:
-            restaurantes = session.query(Restaurante).all():
+            restaurantes = session.query(Restaurante).all()
             for rest in restaurantes:
                 print(f"\n{rest.nome} - {rest.cidade}")
             print("\nTodos os pratos")
