@@ -116,3 +116,17 @@ deletar()
 
 
 
+def listar():
+    with Session() as session:
+        try:
+            restaurantes = session.query(Restaurante).all():
+            for rest in restaurantes:
+                print(f"\n{rest.nome} - {rest.cidade}")
+            print("\nTodos os pratos")
+            pratos = session.query(Prato).all()
+            for prato in pratos:
+                print(f"{prato.nome} - R$ {prato.preco}")
+        except Exception as erro:
+            session.rollback()
+            print(f"Oocorreu um erro{erro}")
+listar()
